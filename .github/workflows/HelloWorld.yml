@@ -1,0 +1,16 @@
+# This workflow will act as a test while experimenting with github workflow actions.
+
+   name: Hello World
+
+   on:
+     push:
+       branches:
+         - master
+
+   jobs:
+     build:
+       runs-on: ubuntu-latest
+
+       steps:
+         - name: Say Hello
+           run: echo "Hello, World"
