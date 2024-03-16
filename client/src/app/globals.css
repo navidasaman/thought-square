@@ -31,3 +31,11 @@ body {
     text-wrap: balance;
   }
 }
+
+.rock3D {
+  font-family: var(--font-rock3d), system-ui;
+  font-weight: 400;
+  font-style: normal;
+  font-size: xxx-large;
+}
+

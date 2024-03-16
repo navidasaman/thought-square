@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Rock_3D } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+//const inter = Inter({ subsets: ["latin"] });
+const rock3D = Rock_3D({ subsets: ["latin"], weight: ["400"], variable: '--font-rock3d' });
 
 export const metadata: Metadata = {
   title: "Thought Square",
@@ -16,7 +17,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={rock3D.variable}>{children}</body>
     </html>
   );
 }
