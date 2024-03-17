@@ -4,7 +4,7 @@ import { BsGithub } from "react-icons/bs";
 
 export default function Footer() {
   const handleGithubLink = () => {
-    window.open("https://github.com/hej/hej", "_blank", "noopener noreferrer");
+    window.open("https://github.com/navidasaman/thought-square", "_blank", "noopener noreferrer");
   };
 
   return (
