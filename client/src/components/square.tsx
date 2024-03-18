@@ -38,9 +38,9 @@ const Square = () => {
   };
 
   return (
-    <div className="p-3 text-50-slate">
+    <div className="p-3 text-50-slate w-96 ">
       <input
-        className="mt-10 p-2 w-96 text-center rounded-l-full bg-slate-400 placeholder-white italic"
+        className="mt-10 p-2 w-11/12 text-center rounded-l-full bg-slate-400 placeholder-white italic"
         placeholder="What's on your mind?"
         type="text"
         value={inputValue}
@@ -53,7 +53,7 @@ const Square = () => {
       >
         ✓
       </button>
-      <div className="bg-gray-950 mt-4 lg:ml-3 sm:ml-2 h-96 overflow-y-auto sm:w-80 lg:w-96 text-300-slate border border-slate-50 border-opacity-40 rounded-md overflow-x-hidden">
+      <div className="bg-gray-950 mt-4 h-96 overflow-y-auto sm:w-80 lg:w-full text-300-slate border border-slate-50 border-opacity-40 rounded-md overflow-x-hidden">
         {messages.slice().reverse().map((message, index) => (
           <div key={index} className="p-2 border-b border-gray-300 border-opacity-20">
             <span className="text-slate-400 block min-w-full text-xs mb-2">{message.timestamp}</span>
