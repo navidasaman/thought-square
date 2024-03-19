@@ -1,11 +1,9 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 
-const Square = () => {
-  const [inputValue, setInputValue] = useState('');
-  const [messages, setMessages] = useState<{ text: string; timestamp: string }[]>(
-    JSON.parse(localStorage.getItem('messages') || '[]')
-  );
+const Square: React.FC = () => {
+  const [inputValue, setInputValue] = useState<string>('');
+  const [messages, setMessages] = useState<{ text: string; timestamp: string }[]>([]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
@@ -19,15 +17,18 @@ const Square = () => {
       setMessages([...messages, newMessage]);
       setInputValue('');
 
-      // Save messages to localStorage with timestamps
-      localStorage.setItem('messages', JSON.stringify([...messages, newMessage]));
+      // Save messages to localStorage (only in the client-side)
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('messages', JSON.stringify([...messages, newMessage]));
+      }
     }
   };
 
   useEffect(() => {
-    // Load messages from localStorage when the component mounts
-    const storedMessages = JSON.parse(localStorage.getItem('messages') || '[]');
-    setMessages(storedMessages);
+    if (typeof window !== 'undefined') {
+      const storedMessages = JSON.parse(localStorage.getItem('messages') || '[]');
+      setMessages(storedMessages);
+    }
   }, []);
 
   // To input message by pressing enter on keyboard
@@ -38,9 +39,9 @@ const Square = () => {
   };
 
   return (
-    <div className="p-3 text-50-slate w-96 ">
+    <div className="p-3 text-50-slate">
       <input
-        className="mt-10 p-2 w-11/12 text-center rounded-l-full bg-slate-400 placeholder-white italic"
+        className="mt-10 p-2 w-96 text-center rounded-l-full bg-slate-400 placeholder-white italic"
         placeholder="What's on your mind?"
         type="text"
         value={inputValue}
@@ -53,9 +54,9 @@ const Square = () => {
       >
         ✓
       </button>
-      <div className="bg-gray-950 mt-4 h-96 overflow-y-auto sm:w-80 lg:w-full text-300-slate border border-slate-50 border-opacity-40 rounded-md overflow-x-hidden">
+      <div className="bg-gray-950 mt-4 lg:ml-3 sm:ml-2 h-96 overflow-y-auto sm:w-80 lg:w-96 text-300-slate border border-slate-50 rounded-md overflow-x-hidden">
         {messages.slice().reverse().map((message, index) => (
-          <div key={index} className="p-2 border-b border-gray-300 border-opacity-20">
+          <div key={index} className="p-2 border-b border-gray-300">
             <span className="text-slate-400 block min-w-full text-xs mb-2">{message.timestamp}</span>
             <span>{message.text}</span>
           </div>
