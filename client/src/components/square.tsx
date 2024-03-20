@@ -39,28 +39,32 @@ const Square: React.FC = () => {
   };
 
   return (
-    <div className="p-3 text-50-slate">
-      <input
-        className="mt-10 p-2 w-96 text-center rounded-l-full bg-slate-400 placeholder-white italic"
-        placeholder="What's on your mind?"
-        type="text"
-        value={inputValue}
-        onChange={handleChange}
-        onKeyPress={handleKeyPress}
-      />
-      <button
-        className="w-fit p-2 rounded-r-full bg-slate-500"
-        onClick={handleAddMessage}
-      >
-        ✓
-      </button>
-      <div className="bg-gray-950 mt-4 lg:ml-3 sm:ml-2 h-96 overflow-y-auto sm:w-80 lg:w-96 text-300-slate border border-slate-50 rounded-md overflow-x-hidden">
-        {messages.slice().reverse().map((message, index) => (
-          <div key={index} className="p-2 border-b border-gray-300">
-            <span className="text-slate-400 block min-w-full text-xs mb-2">{message.timestamp}</span>
-            <span>{message.text}</span>
-          </div>
-        ))}
+    <div className="flex flex-col items-center justify-center">
+      <div>
+        <input
+          className="mt-10 p-2 w-80 text-center rounded-l-full bg-slate-400 placeholder-white italic"
+          placeholder="What's on your mind?"
+          type="text"
+          value={inputValue}
+          onChange={handleChange}
+          onKeyPress={handleKeyPress}
+        />
+        <button
+          className="w-fit p-2 rounded-r-full bg-slate-500"
+          onClick={handleAddMessage}
+        >
+          ✓
+        </button>
+      </div>
+      <div className='flex flex-col items-center justify-center'>
+        <div className="bg-gray-950 mt-4 sm:w-80 lg:w-96 h-96 overflow-y-auto text-300-slate border border-slate-50 rounded-md overflow-x-hidden ">
+          {messages.slice().reverse().map((message, index) => (
+            <div key={index} className="p-2 border-b border-gray-300">
+              <span className="text-slate-400 block min-w-full text-xs mb-2">{message.timestamp}</span>
+              <span>{message.text}</span>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
