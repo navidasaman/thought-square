@@ -57,7 +57,7 @@ const Square: React.FC = () => {
         </button>
       </div>
       <div className='flex flex-col items-center justify-center'>
-        <div className="bg-gray-950 mt-4 sm:w-80 lg:w-96 h-96 overflow-y-auto text-300-slate border border-slate-50 rounded-md overflow-x-hidden ">
+        <div className="bg-gray-950 mt-4 w-96 lg:w-96 h-96 overflow-y-auto text-300-slate border border-slate-50 rounded-md overflow-x-hidden ">
           {messages.slice().reverse().map((message, index) => (
             <div key={index} className="p-2 border-b border-gray-300">
               <span className="text-slate-400 block min-w-full text-xs mb-2">{message.timestamp}</span>
