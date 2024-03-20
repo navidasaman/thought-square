@@ -1,3 +1,4 @@
+import Link from 'next/link';
 
 export default function About() {
   return (
@@ -6,17 +7,14 @@ export default function About() {
         <h1 className="rock3D mt-10 text-center text-4xl mb-5">About</h1>
         <div className="flex justify-center items-center hover:text-blue-600 transition duration-500 ease-in-out transform hover:scale-110">
           <div className="w-fit">
-            {/* Content for the first div */}
             <p className="italic">Release that thought.</p>
             <p className="italic">Give out that advice.</p>
             <p className="italic">Share your story.</p>
           </div>
           <div className="h-20 border-l border-gray-300 m-5"></div>
-          <div className="w-fit text-8xl">
-            {/* Content for the second div */}
-            ♡
-          </div>
+          <div className="w-fit text-8xl">♡</div>
         </div>
+        <Link href="/" className='cursor-pointer text-5xl mt-10 text-blue-600'>🡠</Link>
       </div>
     </main>
   )
