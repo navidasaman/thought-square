@@ -8,9 +8,10 @@ dotenv.config();
 const Square: React.FC = () => {
   const [inputValue, setInputValue] = useState('');
   const [messages, setMessages] = useState<any[]>([]);
+  const crud = process.env.CRUD_API_FETCH || "http://localhost:5000/api/messages";
 
   const fetchMessages = async () => {
-    const response = await fetch(apiUrl);
+    const response = await fetch(crud);
     const data = await response.json();
     setMessages(data);
   };
@@ -21,7 +22,7 @@ const Square: React.FC = () => {
 
   const handleAddMessage = async (newMessage: string, date: string) => {
     try {
-      const response = await fetch(apiUrl, {
+      const response = await fetch(crud, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message: newMessage, timestamp: date }), // Include timestamp in the request body
