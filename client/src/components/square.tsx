@@ -1,7 +1,6 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import dotenv from 'dotenv';
-import { apiUrl } from './config';
 
 dotenv.config();
 
