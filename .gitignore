@@ -1,0 +1,6 @@
+
+client/.env
+client/src/components/config.ts
+server/.env
+server/server/.env
+server/server.mjs
