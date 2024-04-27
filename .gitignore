@@ -5,3 +5,4 @@ server/.env
 server/server/.env
 server/server.mjs
 client/src/components/square.tsx
+.env
