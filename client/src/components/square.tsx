@@ -62,10 +62,6 @@ const Square: React.FC = () => {
 
   return (
     <div className="flex flex-col items-center justify-center">
-      <script src="/socket.io/socket.io.js"></script>
-      <script>
-        const socket = io();
-      </script>
       <div>
         <input
           className="mt-10 p-2 w-80 text-center rounded-l-full bg-slate-400 placeholder-white italic"
