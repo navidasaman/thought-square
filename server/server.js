@@ -11,10 +11,10 @@ var app = express();
 var server = http.createServer(app);
 var io = new Server(server, {
     cors: {
-        origin: 'https://thought-square.vercel.app', // Allow connections from this origin
-        methods: ['GET', 'POST'], // Allow only GET and POST requests
+        origin: 'https://thought-square.vercel.app', // Allow requests from this origin
+        methods: ['GET', 'POST'],
         allowedHeaders: ['*'],
-        credentials: true // Allow credentials (cookies, authorization headers, etc.)
+        credentials: true
     }
 });
 app.use(cors());
