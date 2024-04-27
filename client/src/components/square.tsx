@@ -21,7 +21,7 @@ const Square: React.FC = () => {
 
   useEffect(() => {
     fetchMessages();
-  }, []);
+  },);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);

@@ -11,10 +11,17 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: 'https://thought-square.vercel.app',  // Allow connections from this origin
-    methods: ['GET', 'POST'],                    // Allow only GET and POST requests
+    origin: (origin: any, callback: any) => {
+      // Check if the origin is allowed
+      if (origin && origin.startsWith('https://thought-square')) {
+        callback(null, true); // Allow the request
+      } else {
+        callback(new Error('Not allowed by CORS')); // Reject the request
+      }
+    },
+    methods: ['GET', 'POST'],
     allowedHeaders: ['*'],
-    credentials: true                           // Allow credentials (cookies, authorization headers, etc.)
+    credentials: true
   }
 });
 
