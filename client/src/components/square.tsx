@@ -5,7 +5,10 @@ require('dotenv');
 const messagesEndpointAPI = process.env.API_MESSAGES_ENDPOINT || '/api/messages';
 
 const socket = io();
-console.log('Socket connected:', socket.connected);
+
+socket.on('connect', () => {
+  console.log('Socket connected:', socket.connected);
+});
 
 const Square: React.FC = () => {
   const [inputValue, setInputValue] = useState<string>('');
