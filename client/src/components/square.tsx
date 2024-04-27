@@ -10,6 +10,18 @@ socket.on('connect', () => {
   console.log('Socket connected:', socket.connected);
 });
 
+socket.on('connect_error', (error) => {
+  console.error('Socket connection error:', error);
+});
+
+socket.on('connect_timeout', () => {
+  console.error('Socket connection timeout');
+});
+
+socket.on('error', (error) => {
+  console.error('Socket error:', error);
+});
+
 const Square: React.FC = () => {
   const [inputValue, setInputValue] = useState<string>('');
   const [messages, setMessages] = useState<{ text: string; timestamp: string }[]>([]);
