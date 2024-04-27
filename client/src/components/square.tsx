@@ -11,17 +11,17 @@ const Square: React.FC = () => {
   const [inputValue, setInputValue] = useState<string>('');
   const [messages, setMessages] = useState<{ text: string; timestamp: string }[]>([]);
 
-const fetchMessages = async () => {
-  const response = await fetch(messagesEndpointAPI); 
-  if (response.ok) {
-    const data = await response.json();
-    setMessages(data);
-  }
-};
+  const fetchMessages = async () => {
+    const response = await fetch(messagesEndpointAPI);
+    if (response.ok) {
+      const data = await response.json();
+      setMessages(data);
+    }
+  };
 
   useEffect(() => {
     fetchMessages();
-  }, );
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
@@ -31,7 +31,7 @@ const fetchMessages = async () => {
     if (inputValue.trim() !== '') {
       const currentDateTime = new Date().toLocaleString();
       const newMessage = { text: inputValue, timestamp: currentDateTime };
-      const response = await fetch(messagesEndpointAPI, { 
+      const response = await fetch(messagesEndpointAPI, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -44,14 +44,14 @@ const fetchMessages = async () => {
       }
     }
   };
-  
+
   useEffect(() => {
     // Listen for 'receive-message' event from the server
     socket.on('receive-message', (message) => {
       setMessages((prevMessages) => [...prevMessages, message]);
     });
 
- 
+
   }, []);
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -62,6 +62,10 @@ const fetchMessages = async () => {
 
   return (
     <div className="flex flex-col items-center justify-center">
+      <script src="/socket.io/socket.io.js"></script>
+      <script>
+        const socket = io();
+      </script>
       <div>
         <input
           className="mt-10 p-2 w-80 text-center rounded-l-full bg-slate-400 placeholder-white italic"

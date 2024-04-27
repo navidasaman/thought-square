@@ -5,10 +5,11 @@ var http = require('http');
 var cors = require('cors');
 var socketIo = require('socket.io');
 require('dotenv');
+var Server = require('socket.io').Server;
 var messagesEndpointAPI = process.env.MESSAGES_ENDPOINT_API || '/api/messages';
 var app = express();
 var server = http.createServer(app);
-var io = socketIo(server, {
+var io = new Server(server, {
     cors: {
         origin: 'https://thought-square.vercel.app', // Allow connections from this origin
         methods: ['GET', 'POST'], // Allow only GET and POST requests
@@ -20,6 +21,13 @@ app.use(cors());
 app.use(express.json());
 // Stores messages in memory
 var messages = [];
+// On connect and disconnect
+io.on('connection', function (socket) {
+    console.log('a user connected');
+    socket.on('disconnect', function () {
+        console.log('user disconnected');
+    });
+});
 // Endpoint to post a message
 app.post(messagesEndpointAPI, function (req, res) {
     var _a = req.body, text = _a.text, timestamp = _a.timestamp;

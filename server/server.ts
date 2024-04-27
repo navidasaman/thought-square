@@ -3,12 +3,13 @@ const http = require('http');
 const cors = require('cors');
 const socketIo = require('socket.io');
 require('dotenv');
+const { Server } = require('socket.io');
 
 const messagesEndpointAPI = process.env.MESSAGES_ENDPOINT_API || '/api/messages';
 
 const app = express();
 const server = http.createServer(app);
-const io = socketIo(server, {
+const io = new Server(server, {
   cors: {
     origin: 'https://thought-square.vercel.app',  // Allow connections from this origin
     methods: ['GET', 'POST'],                    // Allow only GET and POST requests
@@ -29,6 +30,14 @@ interface Message {
   timestamp: string;
 }
 
+// On connect and disconnect
+io.on('connection', (socket: any) => {
+  console.log('a user connected');
+  socket.on('disconnect', () => {
+    console.log('user disconnected');
+  });
+});
+
 // Endpoint to post a message
 app.post(messagesEndpointAPI, (req: express.Request, res: express.Response) => {
   const { text, timestamp } = req.body;
@@ -37,7 +46,7 @@ app.post(messagesEndpointAPI, (req: express.Request, res: express.Response) => {
   }
   const newMessage: Message = { text, timestamp };
   messages.push(newMessage);
-  io.emit('receive-message', newMessage); 
+  io.emit('receive-message', newMessage);
   console.log('Message emitted:', newMessage);
   res.status(201).json(newMessage);
 });
