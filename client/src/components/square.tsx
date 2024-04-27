@@ -4,7 +4,7 @@ import io from 'socket.io-client';
 require('dotenv');
 const messagesEndpointAPI = process.env.API_MESSAGES_ENDPOINT || '/api/messages';
 
-const socket = io('https://thought-square.vercel.app');
+const socket = io(window.location.origin);
 console.log('Socket connected:', socket.connected);
 
 const Square: React.FC = () => {
