@@ -4,23 +4,7 @@ import io from 'socket.io-client';
 require('dotenv');
 const messagesEndpointAPI = process.env.API_MESSAGES_ENDPOINT || '/api/messages';
 
-const socket = io('https://thought-square.vercel.app/');
-
-socket.on('connect', () => {
-  console.log('Socket connected:', socket.connected);
-});
-
-socket.on('connect_error', (error) => {
-  console.error('Socket connection error:', error);
-});
-
-socket.on('connect_timeout', () => {
-  console.error('Socket connection timeout');
-});
-
-socket.on('error', (error) => {
-  console.error('Socket error:', error);
-});
+const socket = io('https://thought-square.vercel.app');
 
 const Square: React.FC = () => {
   const [inputValue, setInputValue] = useState<string>('');
@@ -36,7 +20,7 @@ const Square: React.FC = () => {
 
   useEffect(() => {
     fetchMessages();
-  },);
+  },[]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
@@ -56,6 +40,7 @@ const Square: React.FC = () => {
       if (response.ok) {
         setMessages(prevMessages => [...prevMessages, newMessage]);
         setInputValue('');
+        socket.emit('message', 'Hello, Socket.IO!');
       }
     }
   };
@@ -74,6 +59,33 @@ const Square: React.FC = () => {
       handleAddMessage();
     }
   };
+  
+  useEffect(() => {
+    socket.on('connect', () => {
+      console.log('Connected to Socket.IO server');
+    });
+
+    socket.on('message', (data: any) => {
+      setMessages(data);
+    });
+
+    socket.on('connect_error', (error) => {
+      console.error('Socket connection error:', error);
+    });
+    
+    socket.on('connect_timeout', () => {
+      console.error('Socket connection timeout');
+    });
+    
+    socket.on('error', (error) => {
+      console.error('Socket error:', error);
+    });
+
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
+
 
   return (
     <div className="flex flex-col items-center justify-center">
