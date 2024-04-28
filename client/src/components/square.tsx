@@ -4,7 +4,7 @@ import io from 'socket.io-client';
 require('dotenv');
 const messagesEndpointAPI = process.env.API_MESSAGES_ENDPOINT || '/api/messages';
 
-const socket = io('https://thought-square.vercel.app/socket.io/');
+const socket = io('https://thought-square.vercel.app/socket.io?EIO=4&transport=polling&t=OyY0Dj1');
 
 socket.on('connect', () => {
   console.log('Socket connected:', socket.connected);
