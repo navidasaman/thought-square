@@ -1,13 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+import type { Message } from "@/types/message";
 
 // Store messages in memory 
 let messages: Message[] = [];
-
-// Defines the Message interface i.e. whats in it 
-interface Message {
-  text: string;
-  timestamp: string;
-}
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'POST') {

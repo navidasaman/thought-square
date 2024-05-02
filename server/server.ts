@@ -4,6 +4,7 @@ const cors = require('cors');
 const socketIo = require('socket.io');
 require('dotenv');
 const { Server } = require('socket.io');
+import type { Message } from "../client/src/types/message";
 
 const messagesEndpointAPI = process.env.MESSAGES_ENDPOINT_API || '/api/messages';
 
@@ -23,12 +24,6 @@ app.use(express.json());
 
 // Stores messages in memory
 let messages: Message[] = [];
-
-// Defines the Message interface i.e. what it should contain
-interface Message {
-  text: string;
-  timestamp: string;
-}
 
 // On connect and disconnect
 io.on('connection', (socket: any) => {

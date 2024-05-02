@@ -5,6 +5,7 @@
     "skipLibCheck": true,
     "strict": true,
     "noEmit": true,
+    "moduleResolution": "node",
     "esModuleInterop": false,
     "target": "es6",
     "module": "commonjs",
@@ -18,10 +19,11 @@
         "name": "next"
       }
     ],
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["../client/src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "server.mjs", "server.js"],
+  "include": ["next-env.d.ts", "../client/src/**/*.ts", "../client/src/**/*.tsx", "server.mjs", "server.js"],
   "exclude": ["node_modules"]
 }
